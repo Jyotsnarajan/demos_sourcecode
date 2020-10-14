@@ -1,0 +1,109 @@
+# In general, ignore all the files which start with "gi_"
+gi_*
+*.o
+
+# compiled Python code
+*.pyc
+
+# python virtualenv folder of each module
+venv/
+
+# Archive data
+ipol_demo/modules/archive/blobs/*
+ipol_demo/modules/archive/blobs_thumbs/*
+
+# Shared folder
+shared_folder/
+
+# Demoextras in demoinfo
+ipol_demo/modules/demoinfo/demoExtras/*
+
+# DDLs from the ddl tool
+tools/DDL/DDLs
+
+# Binaries in demorunner
+ipol_demo/modules/demorunner/binaries/
+
+# Databases
+*.db
+*.db-journal
+*.sqlite3
+
+# Testing
+ci_tests/send_to.txt
+ci_tests/pdflatex_report.txt
+ci_tests/pdflatex_tmp.txt
+ci_tests/pylint_report.txt
+ci_tests/compilation_folder/
+
+# Sysadmin
+sysadmin/*.txt
+
+# Applications (to be moved to demoDispatcher/demoRunner!)
+app/
+
+# Backup files
+*~
+*.bak
+*.backup
+
+# Mac OS cache
+*DS_Store
+
+# Documentation
+*.bst
+*.aux
+*.bbl
+*.blg
+*.lof
+*.toc
+*.out
+*.fls
+*.fdb_latexmk
+
+# Generated PDF and .tex files
+doc/api/api.pdf
+doc/api/docstrings.tex
+doc/system/ipol.pdf
+doc/control_panel/control_panel.pdf
+doc/ddl/ddl.pdf
+doc/sysadmin/sysadmin.pdf
+doc/clientApp/clientApp.pdf
+
+# logs
+logs/
+*.log
+ipol_demo/modules/archive/logs/error.log
+
+# Editor temporal files
+*.kilepr
+.idea
+.vscode
+*.synctex.gz
+
+# Static data in all modules
+staticData/
+
+# Authentication configuration
+ipol_demo/modules/config_common/authorized_patterns.conf
+
+# Email configuration which contain personal data
+ipol_demo/modules/config_common/emails.conf
+
+# Links to the IPOL environment config files
+ipol_demo/modules/config_common/modules.xml
+ipol_demo/modules/config_common/demorunners.xml
+demorunners.xml
+
+# ClientApp configs
+.csscomb.json
+
+# History
+tools/terminal/history.txt
+
+# other
+changes*.txt
+ipol_demo/app_new/
+ipol_webapp/apps/controlpanel/migrations/*_auto_*.py
+
+
