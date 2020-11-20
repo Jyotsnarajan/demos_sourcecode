@@ -112,11 +112,10 @@ int main(int argc, char **argv)
 	//! Add noise
 	cout << endl << "Add noise [sigma = " << fSigma << "] ...";
 			
-	if (addnoise == 1){
-		add_noise(img, img_noisy, fSigma); }
-	
-	else {
-		img_noisy = img; }
+	if (addnoise == 1)
+		add_noise(img, img_noisy, fSigma); 	
+	else 
+		img_noisy = img; 
 		
     cout << "done." << endl;
 
