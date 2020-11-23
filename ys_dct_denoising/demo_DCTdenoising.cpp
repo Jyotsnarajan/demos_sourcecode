@@ -56,7 +56,7 @@ void addnoise(vector<float>&, vector<float>&, int, float);
 int main(int argc, char **argv)
 {
 
-    if ((argc != 5) && (argc != 6)) {
+    if ((argc != 6) && (argc != 7)) {
         std::cerr << 
 " ************************************************************************** " 
                   << std::endl
@@ -67,7 +67,7 @@ int main(int argc, char **argv)
 " ************************************************************************** " 
                   << std::endl
                   << "Usage: " << argv[0] << 
-" ImClean.png sigma ImNoisy.png ImDenoised.png " 
+" ImClean.png add_noise sigma ImNoisy.png ImDenoised.png " 
                   << std::endl
                   << "Input" << std::endl
                   << 
@@ -117,17 +117,21 @@ ImClean. "        << std::endl
 
     // Read standard deviation of Gaussian white noise
     float sigma = atof(argv[2]);
+    int add_noise = atoi(argv[3]);
 
     int flag_dct16x16 = 0;
-    if (argc == 6) {
-        flag_dct16x16 = atoi(argv[5]);
+    if (argc == 7) {
+        flag_dct16x16 = atoi(argv[6]);
     }
 
 
     ////////// Add Gaussian white noise
     std::vector<float> npixels;
     npixels.resize(w1*h1*c1);
-    addnoise(ipixels, npixels, size, sigma);
+    if (add_noise == 1)
+		addnoise(ipixels, npixels, size, sigma);
+	else
+		npixels = ipixels;
 
 
 
@@ -141,12 +145,14 @@ ImClean. "        << std::endl
     float *out = new float[w1*h1*c1];
     for (int i = 0; i < size; i++)
         out[i] = npixels[i];
-    io_png_write_f32(argv[3], out, w1, h1, c1);
+    if (add_noise == 1) {
+		io_png_write_f32(argv[4], out, w1, h1, c1);
+	}
 
     // Save output denoised image
     for (int i = 0; i < size; i++)
         out[i] = opixels[i];
-    io_png_write_f32(argv[4], out, w1, h1, c1);
+    io_png_write_f32(argv[5], out, w1, h1, c1);
 
     delete[] out; /*memcheck*/
 
