@@ -28,11 +28,11 @@ using namespace std;
 int main(int argc, char **argv)
 {
 
-    if(argc<7)
+    if(argc<8)
     {
         cout<<"Error! Input parameters are not complete!"<<endl;
         cout<<"Usage:"<<endl;
-        cout<<"blsgsm InputImage sigma OutputDenoisedImage OutputNoisyImage OutputDifferenceImg ComputePSNR(0 or 1)"<<endl;
+        cout<<"blsgsm InputImage add_noise sigma OutputDenoisedImage OutputNoisyImage OutputDifferenceImg ComputePSNR(0 or 1)"<<endl;
         return 1;
     }
 
@@ -58,21 +58,28 @@ int main(int argc, char **argv)
     int Nsc = ceil(log10(min(width,height))/log10(2) - 4); //Number of scales in steerable pyramid
 	int Nor = 4;//Number of orientaions in each scale of steerable pyramid
 	float sig = atof(argv[2]); //noise standard deviation
+	int add_noise = atoi(argv[3]); //add_noise to input image
 	int blSize[] = {3,3}; //size of neighborhood around each coefficient in the same subband (should be odd)
 	int parent = 1; //including or not including a coefficient from the next coarser scale but the same location and orientation in neighborhood
 	int boundary = 1; //boundary mirror extension or not, to avoid boundary artifacts
 	vector< vector <float > > PS; //power spectral density - here: flat or white noise
 
     //adding Gaussian noise to input image with zero mean and standard deviation equal to sig
-    addnoise(origin, height*width*nchannel, sig);
-
-    //writing noisy image
-    if(io_png_write_f32(argv[4], origin, width, height, nchannel)!=0)
+    if(add_noise==1)
     {
-        cout<<"Error! Unable to write noisy image"<<endl;
-        return 1;
-    }
-
+		addnoise(origin, height*width*nchannel, sig);
+	}
+	
+    //writing noisy image
+    if(add_noise==1)
+    {
+		if(io_png_write_f32(argv[5], origin, width, height, nchannel)!=0)
+		{
+			cout<<"Error! Unable to write noisy image"<<endl;
+			return 1;
+		}
+	}
+	
     //image holder same as origin but using vector class
     vector< vector< vector <float > > > img;
 
@@ -139,7 +146,7 @@ int main(int argc, char **argv)
     }
 
     //writing output denoised image
-    if(io_png_write_f32(argv[3], denoised, width, height, nchannel)!=0)
+    if(io_png_write_f32(argv[4], denoised, width, height, nchannel)!=0)
     {
         cout<<"Error! Unable to write output denoised image"<<endl;
         return 1;
@@ -161,13 +168,13 @@ int main(int argc, char **argv)
         diffImg[i] = (tmp < 0.0f ? 0.0f : (tmp > 255.0f ? 255.0f : tmp));
     }
 
-    if(io_png_write_f32(argv[5], diffImg, width, height, nchannel)!=0)
+    if(io_png_write_f32(argv[6], diffImg, width, height, nchannel)!=0)
     {
         cout<<"Error! Unable to write output difference image"<<endl;
         return 1;
     }
 
-    if(atof(argv[6])==1)
+    if(atof(argv[7])==1)
         PrintMeasurements(origin, denoised, size);
 
     //release memory
