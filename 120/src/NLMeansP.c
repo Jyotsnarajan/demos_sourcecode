@@ -66,6 +66,7 @@ pseudo-random seed)\n");
   fprintf(stderr, "\t     \tor 0 to select the plain Euclidean norm\n");
   fprintf(stderr, "\t-h h:\tSet the filtering parameter\n");
   fprintf(stderr, "\tU:\tInput original image (PNG format)\n");
+  fprintf(stderr, "\tnoise:\tAdd noise to the input image\n");
   fprintf(stderr, "\tsigma:\tStandard deviation of the noise to be applied\n");
   fprintf(stderr, "\tV:\tOutput noisy image (PNG format)\n");
   fprintf(stderr, "\tVd:\tOutput denoised image (PNG format)\n");
@@ -391,7 +392,7 @@ int main(int argc, char *argv[])
     }
   
   /* Command has 4 needed arguments */
-  if (optind+4 != argc) 
+  if (optind+5 != argc) 
     {
       fprintf(stderr,"Please give the arguments U, sigma, V and Vd.\n");
       PrintUsage();
@@ -461,8 +462,14 @@ planes.\n");
     }
 
   /* Compute V = U + noise, using given or pseudo random seed */
+  int noise = atoi(argv[3]);
   if (sopt==0) seed=time(NULL) + getpid();
-  addgaussnoise(U, V, sigma, seed, NNc);
+  
+  if (noise==1)
+	addgaussnoise(U, V, sigma, seed, NNc);
+  else
+	V = U;
+  
 
   /* Call NLM-P/NLM-Pa denoising scheme, clocking the call if requested */
   if (copt==1) t0=clock();
@@ -474,18 +481,21 @@ planes.\n");
      does not exactly matches the noisy image on which computation has
      been done. In particular, the noise standard deviation is lower.
    */
-  if (io_png_write_f32(argv[optind+2], V, N1, N2, Nc) != 0)
-    {
-      fprintf(stderr,"Couldn't write output noisy image V '%s'\n",
-	      argv[optind+1]);
-      exit(EXIT_FAILURE);       
-    }    
+  if (noise==1)
+	{ 
+	  if (io_png_write_f32(argv[optind+3], V, N1, N2, Nc) != 0)
+		{
+		  fprintf(stderr,"Couldn't write output noisy image V '%s'\n",
+			  argv[optind+3]);
+		  exit(EXIT_FAILURE);       
+		}
+	}    
 
   /* Write output denoised image in PNG format */
-  if (io_png_write_f32(argv[optind+3], Vd, N1, N2, Nc) != 0) 
+  if (io_png_write_f32(argv[optind+4], Vd, N1, N2, Nc) != 0) 
     {
       fprintf(stderr,"Couldn't write output denoised image Vd'%s'\n",
-	      argv[optind+1]);
+	      argv[optind+4]);
       exit(EXIT_FAILURE);       
     }    
 
