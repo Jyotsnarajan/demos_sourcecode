@@ -46,7 +46,7 @@ You can also wanted to see the bias (result of the algorithm applied
 to the original image), in this case use compute_bias = true.
  
 Example, run
-./NL_Bayes input.png 10 ImNoisy.png ImDenoised.png ImBasic.png ImDiff.png ImBias.png ImBiasBasic ImDiffBias.png 1 0 1
+./NL_Bayes input.png 10 1 ImNoisy.png ImDenoised.png ImBasic.png ImDiff.png ImBias.png ImBiasBasic ImDiffBias.png 1 0 1
 
 4. Results are available in the file "measures.txt".
 
