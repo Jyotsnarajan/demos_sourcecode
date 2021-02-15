@@ -52,7 +52,7 @@ the library to the program.
 ./demo_DCTdenoising 
  
 Example, run
-./demo_DCTdenoising cinput.png 10 ImNoisy.png ImDenoised.png ImDiff.png
+./demo_DCTdenoising cinput.png 10 1 ImNoisy.png ImDenoised.png ImDiff.png
 
 
 # ABOUT THIS FILE
