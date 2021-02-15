@@ -47,7 +47,7 @@ There are multiple ways to run the code:
 (3) if you want to obtain the best PSNR result, use doBestPSNR = true
  
 Example, run
-./ksvd cinput.png 10 ImNoisy.png ImDenoised.png ImDiff.png ImBias.png ImDiffBias.png 0 1 0
+./ksvd cinput.png 10 1 ImNoisy.png ImDenoised.png ImDiff.png ImBias.png ImDiffBias.png 0 1 0
 
 
 
