@@ -42,12 +42,13 @@ make
 ./BM3Ddenoising
 The generic way to run the code is:
 
-./BM3Ddenoising cinput.png sigma ImNoisy.png ImBasic.png ImDenoised.png ImDiff.png ImBias.png
+./BM3Ddenoising cinput.png sigma add_noise ImNoisy.png ImBasic.png ImDenoised.png ImDiff.png ImBias.png
 ImDiffBias.png computeBias 2DtransformStep1 useSD1 2DtransformStep2 useSD2 ColorSpace
 
 with :
 - cinput.png is a noise-free image;
 - sigma is the value of the noise which will be added to cinput.png;
+- add_noise is the option to add noise or not to the input image;
 - ImNoisy.png will contain the noisy image;
 - ImBasic.png will contain the result of the first step of the algorithm;
 - ImDenoised.png will contain the final result of the algorithm;
@@ -76,7 +77,7 @@ bior).
 (5) you can choose the colorspace for both steps between : rgb, yuv, ycbcr and opp.
  
 Example, run
-./BM3Ddenoising cinput.png 10 ImNoisy.png ImBasic.png ImDenoised.png ImDiff.png ImBias.png
+./BM3Ddenoising cinput.png 10 1 ImNoisy.png ImBasic.png ImDenoised.png ImDiff.png ImBias.png
 ImDiffBias.png 1 bior 0 dct 1 opp
 
 
