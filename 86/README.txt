@@ -39,10 +39,10 @@ OR
 make
 
 3. Run blsgsm image denoising.
-./blsgsm InputImage sigma OutputDenoisedImage OutputNoisyImage OutputDifferenceImg ComputePSNR(0 or 1)
+./blsgsm InputImage sigma add_noise OutputDenoisedImage OutputNoisyImage OutputDifferenceImg ComputePSNR(0 or 1)
 
 Example, run
-./blsgsm building1.png 10 denoised.png noisy.png diff.png 1
+./blsgsm building1.png 10 1 denoised.png noisy.png diff.png 1
 
 PSNR/RMSE: 34.62/4.74
 
