@@ -46,8 +46,9 @@ Simply use the provided makefile, with the command `make`.
 
 usage: nlmeans_ipol image sigma noisy denoised 
 
-`nlmeans_ipol ` takes 4 parameter: `nlmeans_ipol in.png sigma noisy.png denoised.png`
+`nlmeans_ipol ` takes 5 parameter: `nlmeans_ipol in.png sigma add_noise noisy.png denoised.png`
 * `sigma`     : the noise standard deviation
+* `add_noise`     : the add noise option
 * `in.png`   : initial noise free image
 * `noisy.png`  : noisy image used by the denoising algorithm
 * `denoised.png` : denoised image
