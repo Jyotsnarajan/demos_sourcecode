@@ -74,7 +74,7 @@ and get the PSNR between original and denoised image by
 
 4. Example (you should provide a PNG noise-free image named "U.png"):
 
-make opti OMP=1 -j4 -C nlmp_1.2
+make opti OMP=1
 ./NLMeansP U.png 20 1 V.png Vd.png
 ./img_mse_ipol U.PNG Vd.png
 
